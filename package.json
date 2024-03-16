@@ -4,6 +4,10 @@
   "description": "A Secure Login Page With Node.js",
   "main": "index.js",
   "scripts": {
+    "start": "npm-run-all server client",
+    "server": "server.bat",
+    "client": "client.bat",
+
     "build": "npm-run-all  buildServer buildClient",
     "buildServer":"npm install",
     "buildClient":"npm --prefix ./Client install",
