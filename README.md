@@ -7,4 +7,4 @@ Uses Node.js Crypto Module to hash the data into Hashedmap
 <h2 align="center">⚒️ Tool Used ⚒️</h2>
 <br/>
 <div align="center">
-    <img src="https://skillicons.dev/icons?i=html,css,javascript,react,nodejs,express,mysql" />
+    <img src="https://skillicons.dev/icons?i=html,css,javascript,vite,react,nodejs,express,mysql" />
