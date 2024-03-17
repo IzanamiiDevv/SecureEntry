@@ -6,12 +6,36 @@ const fs = require('fs');
 const mysql = require('mysql');
 
 
-
 const app = express();
 const PORT = 3000;
-const publicPath = path.join(__dirname,'public')
+const publicPath = path.join(__dirname,'public');
+const DBName = "testusersdb";
+
+//DataBase Connection
+const sql = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'test',
+    database:DBName
+});
+
+
+// Attempt to connect to the database
+sql.connect(err => {
+    if(err){console.error(err)}else{
+        console.log("Server was connected to database!");
+        sql.query('',(err)=>{
+            if(err){console.error(err)}else{
+                console.log("Element Added")}
+        });
+    }
+});
+
 
 app.use(express.static(publicPath));
+
+
+
 
 //middleware
 app.use(express.json());
