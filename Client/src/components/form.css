@@ -6,17 +6,26 @@
     width: 400px;
     height: 500px;
     background-color: white;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
     border-radius: 20px;
     padding-top: 5vh;
 }
 
+.container {
+    margin-top: 5vh;
+}
+
 #titlebar {
     font-size: 2rem;
+    text-align: center;
 }
 
 button {
+    margin-top: 2vh;
+    position: relative;
     border-style: none;
+    width: 100px;
+    height: 25px;
+    background-color: rgb(209, 206, 206);
+    border-radius: 10px;
+    left: calc(50% - 100px / 2);
 }
