@@ -1,1 +1,2 @@
-npm --prefix ./Client npm run dev
+@echo off
+start cmd /k "npm --prefix ./Client run dev"
