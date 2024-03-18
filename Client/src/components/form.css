@@ -12,11 +12,25 @@
 
 .container {
     margin-top: 5vh;
+    margin-left: 10vh;
+}
+
+hr{
+    margin-top: 5%;
+    margin-bottom: 2vh;
+}
+
+p{
+    text-align: center;
 }
 
 #titlebar {
     font-size: 2rem;
     text-align: center;
+}
+
+input{
+    margin-top: 2vh;
 }
 
 button {
@@ -28,4 +42,14 @@ button {
     background-color: rgb(209, 206, 206);
     border-radius: 10px;
     left: calc(50% - 100px / 2);
+}
+
+#btn {
+    background-color: rgb(139, 56, 206);
+    color: white;
+    transition: ease-in-out;
+}
+
+#btn:hover {
+    background-color: rgb(107, 37, 163);
 }

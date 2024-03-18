@@ -6,6 +6,7 @@ function Signup(props){
     <section className="form">
       <title>Signup</title>
       <h1 id="titlebar">Signup</h1>
+      <hr />
       <div className="container">
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" placeholder="IzanamiiDevv"/>
@@ -16,8 +17,11 @@ function Signup(props){
         <label htmlFor="hidepass">Show Password</label>
         <input type="checkbox"id="hidepass" />
       </div>
-      <button>Confirm</button>
+      <button id="btn">Confirm</button>
       <br />
+      <hr />
+      <p>Do You Already Have an Account?</p>
+      <p>Try Logging In.</p>
       <button onClick={()=>{
         props.login(true)
       }}>Login</button>
