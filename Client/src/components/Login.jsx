@@ -1,7 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import './form.css';
 
 function Login(props){
+
+  const [userName , setUserName ] = useState('');
+  const [userPass , setUserPass ] = useState('');
+  const [ showPass , setShow ] = useState(false);
+
+
   return (
     <section className="form">
       <title>Login</title>
@@ -9,15 +15,28 @@ function Login(props){
       <hr />
       <div className="container">
         <label htmlFor="name">Name:</label>
-        <input type="text" id="name"placeholder="IzanamiiDevv"/>
+        <input type="text" id="name"placeholder="IzanamiiDevv" onChange={(e)=>{
+          setUserName(e.target.value);
+        }}/>
         <br />
         <label htmlFor="password">Password:</label>
-        <input type="text" id="password" placeholder="1234567890"/>
+        {(showPass) ? 
+        <input type="text" id="password" placeholder="1234567890" onChange={(e)=>{
+          setUserPass(e.target.value);
+        }}/>:
+        <input type="password" id="password" placeholder="1234567890" onChange={(e)=>{
+          setUserPass(e.target.value);
+        }}/>}
         <br />
         <label htmlFor="hidepass">Show Password</label>
-        <input type="checkbox"id="hidepass" />
+        <input type="checkbox"id="hidepass" onChange={()=>{
+          setShow(!showPass)
+        }}/>
       </div>
-      <button id="btn">Confirm</button>
+      <button id="btn" onClick={(e)=>{
+        console.log(userName);
+        console.log(userPass);
+      }}>Confirm</button>
       <br />
       <hr />
       <p>Do You Already Have an Account?</p>
