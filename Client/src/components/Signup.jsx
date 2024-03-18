@@ -33,8 +33,6 @@ function Signup(props){
         }}/>
       </div>
       <button id="btn" onClick={(e)=>{
-        console.log(userName);
-        console.log(userPass);
       }}>Confirm</button>
       <br />
       <hr />
