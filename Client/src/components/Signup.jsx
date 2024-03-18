@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import './form.css';
 
 function Signup(props){
@@ -20,7 +20,7 @@ function Signup(props){
         <br />
         <label htmlFor="password">Password:</label>
         {(showPass) ? 
-        <input type="text" id="password" placeholder="1234567890" onChange={(e)=>{
+        <input type="text" id="password" placeholder="1234567890"  onChange={(e)=>{
           setUserPass(e.target.value);
         }}/>:
         <input type="password" id="password" placeholder="1234567890" onChange={(e)=>{
@@ -32,7 +32,8 @@ function Signup(props){
           setShow(!showPass)
         }}/>
       </div>
-      <button id="btn" onClick={(e)=>{
+      <button id="btn" onClick={()=>{
+        console.log(userName,userPass);
       }}>Confirm</button>
       <br />
       <hr />
