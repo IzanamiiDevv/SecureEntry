@@ -4,6 +4,7 @@ const crpyto = require('crypto');
 const cors = require('cors');
 const fs = require('fs');
 const mysql = require('mysql');
+require('dotenv').config();
 
 
 const app = express();
@@ -12,10 +13,10 @@ const publicPath = path.join(__dirname,'public');
 
 //DataBase Connection
 const sql = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'test',
-    database:'testusersdb'
+    host:process.env.DB_HOST,
+    user:process.env.DB_USER,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_NAME
 });
 
 
