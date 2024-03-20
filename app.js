@@ -38,8 +38,8 @@ function addToDataBase(username,userpassword){
 }
 
 //Delete an Item from Database
-function deleteFromDataBase(username) {
-    const query = `DELETE FROM users WHERE UserName = '${username}';`;
+function deleteFromDataBase(username,password) {
+    const query = `DELETE FROM users WHERE UserName = '${username}' AND UserPAssword = '${password}';`;
 
     return query;
 }
@@ -59,16 +59,16 @@ app.use(cors({
 
 
 //Test URI
-app.get('/?testAdd',(req,res)=>{
+app.get('/testAdd',(req,res)=>{
     sql.query(addToDataBase('izanamii','0987654321'),(err)=>{
-        if(!err){console.log("Element successfully Added")}
+        if(!err){res.send("Element successfully Added")}
         else{console.error(err)}
     });
 })
 
-app.get('/?testDelete',(req,res)=>{
-    sql.query(deleteFromDataBase('izanamii'), (err) => {
-        if(!err){console.log("Element successfully deleted");
+app.get('/testDelete',(req,res)=>{
+    sql.query(deleteFromDataBase('izanamii','0987654321'), (err) => {
+        if(!err){res.send("Element successfully deleted");
         }else{console.error(err)}
     });
 })
