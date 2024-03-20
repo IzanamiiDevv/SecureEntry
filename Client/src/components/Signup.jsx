@@ -7,6 +7,7 @@ function Signup(props){
   const [userPass , setUserPass ] = useState('');
   const [ showPass , setShow ] = useState(false);
 
+
   return (
     <section className="form">
       <title>Signup</title>
@@ -29,7 +30,7 @@ function Signup(props){
         <br />
         <label htmlFor="hidepass">Show Password</label>
         <input type="checkbox"id="hidepass" onChange={()=>{
-          setShow(!showPass)
+          setShow(!showPass);
         }}/>
       </div>
       <button id="btn" onClick={()=>{
@@ -37,6 +38,8 @@ function Signup(props){
       }}>Confirm</button>
       <br />
       <hr />
+      //Result Message
+      <p>{}</p>
       <p>Do You Already Have an Account?</p>
       <p>Try Loging In.</p>
       <button onClick={()=>{

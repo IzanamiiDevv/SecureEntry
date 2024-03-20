@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './form.css';
 
 function Login(props){
@@ -6,7 +6,17 @@ function Login(props){
   const [userName , setUserName ] = useState('');
   const [userPass , setUserPass ] = useState('');
   const [ showPass , setShow ] = useState(false);
+  const [ message, setMessage ] = useState('');
 
+  useEffect(()=>{
+
+    const validregex = /[!@#$%^&*()+=<>?/,.{}:;"' ]/gi;
+    if(validregex.test(userName) || validregex.test(userPass)){
+      setMessage('Invalid Input')
+    }else{
+      setMessage('')
+    }
+  },[userName,userPass])
 
   return (
     <section className="form">
@@ -30,15 +40,15 @@ function Login(props){
         <br />
         <label htmlFor="hidepass">Show Password</label>
         <input type="checkbox"id="hidepass" onChange={()=>{
-          setShow(!showPass)
+          setShow(!showPass);
         }}/>
       </div>
       <button id="btn" onClick={(e)=>{
-        console.log(userName);
-        console.log(userPass);
+        console.log(userName,userPass);
       }}>Confirm</button>
       <br />
       <hr />
+      <p>{message}</p>
       <p>Do You Already Have an Account?</p>
       <p>Try Signing In.</p>
       <button onClick={()=>{
