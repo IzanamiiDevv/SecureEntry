@@ -12,11 +12,15 @@ function Login(props){
 
     const validregex = /[!@#$%^&*()+=<>?/,.{}:;"' ]/gi;
     if(validregex.test(userName) || validregex.test(userPass)){
-      setMessage('Invalid Input')
+      setMessage('Invalid Input');
     }else{
-      setMessage('')
+      setMessage('');
     }
-  },[userName,userPass])
+  },[userName,userPass]);
+
+  function login(obj){
+    props.setLog(true)
+  }
 
   return (
     <section className="form">
@@ -44,7 +48,7 @@ function Login(props){
         }}/>
       </div>
       <button id="btn" onClick={(e)=>{
-        console.log(userName,userPass);
+        login({name:userName,password:userPass});
       }}>Confirm</button>
       <br />
       <hr />
