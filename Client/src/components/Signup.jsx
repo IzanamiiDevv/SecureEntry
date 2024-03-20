@@ -48,7 +48,6 @@ function Signup(props){
       }}>Confirm</button>
       <br />
       <hr />
-      //Result Message
       <p id="display">{message}</p>
       <p>Do You Already Have an Account?</p>
       <p>Try Loging In.</p>
