@@ -3,19 +3,19 @@ const path = require('path');
 const crpyto = require('crypto');
 const cors = require('cors');
 const fs = require('fs');
+const mysql = require('mysql');
 
 
 const app = express();
 const PORT = 3000;
 const publicPath = path.join(__dirname,'public');
-const DBName = "testusersdb";
 
 //DataBase Connection
 const sql = mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'test',
-    database:DBName
+    database:'testusersdb'
 });
 
 
@@ -23,11 +23,23 @@ const sql = mysql.createConnection({
 sql.connect(err => {
     if(err){console.error(err)}else{
         console.log("Server was connected to database!");
-        sql.query('',(err)=>{
-            if(err){console.error(err)}else{
-                console.log("Element Added")}
-        });
     }
+});
+
+//Add item to the user
+function addToDataBase(username,userpassword){
+    const query = "INSERT INTO `users` (`UserName`, `UserPassword`) VALUES ('testuser', 'testpass');"
+    const inserted = query.split("'");
+    inserted[1] = username;
+    inserted[3] = userpassword;
+    const joined = inserted.join("'");
+
+    return joined;
+}
+
+sql.query(addToDataBase('izanamii','0987654321'),(err)=>{
+    if(!err){console.log("Element successfully Added")}
+    else{console.error(err)}
 });
 
 
