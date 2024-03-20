@@ -109,7 +109,7 @@ function login(data, callback) {
 
 
 app.post('/LogIn',(req,res)=>{
-    const data = req.body.message;
+    const data = req.body.data;
     login(data, (respond) => {
         res.send(respond);
     });
@@ -143,7 +143,7 @@ function signUp(data, callback) {
                 if (writeErr) {
                     console.error('Error writing file:', writeErr);
                 } else {
-                    callback('User successfully registered');
+                    callback('Account Succsessfully Created!');
                 }
             });
         }
@@ -151,7 +151,7 @@ function signUp(data, callback) {
 }
 
 app.post('/SignIn',(req,res)=>{
-    const data = req.body.message;
+    const data = req.body.data;
     signUp(data, (respond) => {
         res.send(respond);
     });
