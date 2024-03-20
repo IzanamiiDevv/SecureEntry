@@ -37,10 +37,13 @@ function addToDataBase(username,userpassword){
     return joined;
 }
 
-sql.query(addToDataBase('izanamii','0987654321'),(err)=>{
-    if(!err){console.log("Element successfully Added")}
-    else{console.error(err)}
-});
+//Delete an Item from Database
+function deleteFromDataBase(username) {
+    const query = `DELETE FROM users WHERE UserName = '${username}';`;
+
+    return query;
+}
+
 
 
 app.use(express.static(publicPath));
@@ -54,6 +57,23 @@ app.use(cors({
     origin: "*"
 }));
 
+
+//Test URI
+app.get('/?testAdd',(req,res)=>{
+    sql.query(addToDataBase('izanamii','0987654321'),(err)=>{
+        if(!err){console.log("Element successfully Added")}
+        else{console.error(err)}
+    });
+})
+
+app.get('/?testDelete',(req,res)=>{
+    sql.query(deleteFromDataBase('izanamii'), (err) => {
+        if(!err){console.log("Element successfully deleted");
+        }else{console.error(err)}
+    });
+})
+
+//Root Files
 app.get('/',(req,res)=>{
     //Entry Point
     res.sendFile(path.join(publicPath,'page.signin.html'));
