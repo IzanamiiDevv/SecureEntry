@@ -6,7 +6,17 @@ function Signup(props){
   const [userName , setUserName ] = useState('');
   const [userPass , setUserPass ] = useState('');
   const [ showPass , setShow ] = useState(false);
+  const [ message, setMessage ] = useState('');
 
+  useEffect(()=>{
+
+    const validregex = /[!@#$%^&*()+=<>?/,.{}:;"' ]/gi;
+    if(validregex.test(userName) || validregex.test(userPass)){
+      setMessage('Invalid Input')
+    }else{
+      setMessage('')
+    }
+  },[userName,userPass])
 
   return (
     <section className="form">
@@ -39,7 +49,7 @@ function Signup(props){
       <br />
       <hr />
       //Result Message
-      <p>{}</p>
+      <p id="display">{message}</p>
       <p>Do You Already Have an Account?</p>
       <p>Try Loging In.</p>
       <button onClick={()=>{

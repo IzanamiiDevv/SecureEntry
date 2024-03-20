@@ -48,7 +48,7 @@ function Login(props){
       }}>Confirm</button>
       <br />
       <hr />
-      <p>{message}</p>
+      <p id="display">{message}</p>
       <p>Do You Already Have an Account?</p>
       <p>Try Signing In.</p>
       <button onClick={()=>{
