@@ -24,7 +24,12 @@ function Signup(props){
         body: JSON.stringify({ data })
       }).then(response => response.text())
       .then(data => {
-        setMessage(data);
+        if(data == 'Account Succsessfully Created!'){
+          setMessage(data + "\n Redirecting you to Login");
+          setTimeout(()=>{
+            props.login(true);
+          },3000)
+        }else{setMessage(data)}
       }).catch(err => {
         setMessage("Error on Creating an Account: ", err)
       })
