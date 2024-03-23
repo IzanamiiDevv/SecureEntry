@@ -117,6 +117,8 @@ app.post('/LogIn',(req,res)=>{
     });
 });
 
+
+//Prototype Method Unused..
 function signUp(data, callback) {
     function toHash(inc) {
         const hash = crpyto.createHash('sha256');
@@ -152,21 +154,73 @@ function signUp(data, callback) {
     });
     */
     //To Data Base..
-    sql.query("SELECT UserName FROM users",(err,users)=>{
+    sql.query("SELECT UserName FROM usersdb",(err,users)=>{
         if (!err) {
             const names = users.map(user => user.UserName);
-            isUserExist =  names.includes(data.name);
+            console.log(names);
+            console.log(users);
+            console.log(toHash(data.name))
+            console.log(names.includes(toHash(data.name)))
+
+            isUserExist =  names.includes(toHash(data.name));
 
             if(isUserExist){callback('Username already exists. Please choose a different one.')}else{
-                
+                sql.query(addToDataBase(toHash(data.name),toHash(data.password)),(err)=>{
+                    if(!err){callback("Account successfully Added")}
+                    else{console.error(err)}
+                });
             }
         }else{console.error(err)}
     });
 }
 
+
+//SignUP Method
+function signUps(data, callback) {
+    function addToDataBase(username, userpassword) {
+        return `INSERT INTO usersdb (UserName, UserPassword) VALUES ('${toHash(username)}', '${toHash(userpassword)}')`;
+    }
+
+    function toHash(input) {
+        const hash = crpyto.createHash('sha256');
+        hash.update(input);
+        return hash.digest('hex');
+    }
+
+    // Check if username already exists
+    sql.query("SELECT UserName FROM usersdb", (err, users) => {
+        if (err) {
+            console.error(err);
+            return callback("Error checking existing usernames");
+        }
+
+        const hashedUsername = toHash(data.name);
+        const existingUsernames = users.map(user => user.UserName);
+        
+        if (existingUsernames.includes(hashedUsername)) {
+            return callback('Username already exists. Please choose a different one.');
+        }
+
+        // If username doesn't exist, proceed with adding to the database
+        const hashedPassword = toHash(data.password);
+        const query = addToDataBase(data.name, data.password);
+
+        console.log(hashedPassword)
+
+        sql.query(query, (err) => {
+            if (err) {
+                console.error(err);
+                return callback("Error adding user to the database");
+            }
+            callback("Account successfully added");
+        });
+    });
+}
+
+
 app.post('/SignIn',(req,res)=>{
     const data = req.body.data;
-    signUp(data, (respond) => {
+    signUps(data, (respond) => {
         res.send(respond);
     });
 });
