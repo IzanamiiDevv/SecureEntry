@@ -11,6 +11,9 @@ const app = express();
 const PORT = 3000;
 const publicPath = path.join(__dirname,'public');
 
+//Change the value of the database connection
+//In this file your table is named usersdb
+
 //DataBase Connection
 const sql = mysql.createConnection({
     host:process.env.DB_HOST || 'localhost',
