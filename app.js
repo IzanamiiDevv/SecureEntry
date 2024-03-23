@@ -158,18 +158,7 @@ function signUp(data, callback) {
             isUserExist =  names.includes(data.name);
 
             if(isUserExist){callback('Username already exists. Please choose a different one.')}else{
-                //Test
-                object.push({
-                    name: toHash(data.name),
-                    password: toHash(data.password),
-                });
-                fs.writeFile(path.join(publicPath, 'data.json'), JSON.stringify(object, null, 2), 'utf-8', (writeErr) => {
-                    if (writeErr) {
-                        console.error('Error writing file:', writeErr);
-                    } else {
-                        callback('Account Succsessfully Created!');
-                    }
-                });
+                
             }
         }else{console.error(err)}
     });
