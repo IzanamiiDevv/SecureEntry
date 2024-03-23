@@ -87,6 +87,7 @@ function login(data, callback) {
         hash.update(inc);
         return hash.digest('hex');
     }
+    console.log(data.name,data.password)
 
     fs.readFile(path.join(publicPath, 'data.json'), 'utf-8', (err, fileData) => {
         if (err) {
@@ -110,6 +111,7 @@ function login(data, callback) {
 
 app.post('/LogIn',(req,res)=>{
     const data = req.body.data;
+    console.log(data)
     login(data, (respond) => {
         res.send(respond);
     });

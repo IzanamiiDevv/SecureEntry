@@ -2,15 +2,13 @@ import React, {useState, useEffect} from "react";
 import './form.css';
 
 function Login(props){
-
+  const validregex = /[!@#$%^&*()+=<>?/,.{}:;"' ]/gi;
   const [userName , setUserName ] = useState('');
   const [userPass , setUserPass ] = useState('');
   const [ showPass , setShow ] = useState(false);
   const [ message, setMessage ] = useState('');
 
   useEffect(()=>{
-
-    const validregex = /[!@#$%^&*()+=<>?/,.{}:;"' ]/gi;
     if(validregex.test(userName) || validregex.test(userPass)){
       setMessage('Invalid Input');
     }else{
@@ -18,8 +16,27 @@ function Login(props){
     }
   },[userName,userPass]);
 
-  function login(obj){
-    props.setLog(true)
+  function login({name, password}){
+    if(validregex.test(name + password) || (name + password).length == 0){setMessage("Invalid Input")}else{
+      setMessage('Sending Request to Server Please Wait...');
+      const data = {
+        name: name,
+        password: password
+      }
+      fetch('http://localhost:3000/LogIn',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data })
+      }).then(response => response.text())
+      .then(data => {
+        if(data == "Login Sucessfull"){props.setLog(true)}else{
+          setMessage("Something Went Wrong Pls Check Again")}
+      }).catch(err => {
+        setMessage("Something Went Wrong Pls Check Again");
+      })
+    }
   }
 
   return (
