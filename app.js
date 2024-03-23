@@ -81,6 +81,8 @@ app.get('/',(req,res)=>{
 });
 
 //Server Op
+
+//Prototpye Method Unused
 function login(data, callback) {
     function toHash(inc) {
         const hash = crpyto.createHash('sha256');
@@ -108,11 +110,36 @@ function login(data, callback) {
     });
 }
 
+function logins(data,callback){
+    function toHash(inc) {
+        const hash = crpyto.createHash('sha256');
+        hash.update(inc);
+        return hash.digest('hex');
+    }
+
+    sql.query("SELECT * FROM usersdb", (err, users) => {
+        if (err) {
+            console.error(err);
+            return callback("Error on Cheking The Data");
+        }
+
+        const DATA = users.map(data => {return {name:data.UserName,pass:data.UserPassword}});
+        const isLogged = DATA.some(userData => {
+            return userData.name === toHash(data.name) && userData.pass === toHash(data.password);
+        });
+
+        if (isLogged) {
+            callback('Login Sucessfull');
+        } else {
+            callback('Login failed')
+        }
+    });
+}
+
 
 app.post('/LogIn',(req,res)=>{
     const data = req.body.data;
-    console.log(data)
-    login(data, (respond) => {
+    logins(data, (respond) => {
         res.send(respond);
     });
 });
