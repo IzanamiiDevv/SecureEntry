@@ -32,7 +32,7 @@ function Login(props){
       }).then(response => response.text())
       .then(data => {
         if(data == "Login Sucessfull"){props.setLog(true)}else{
-          setMessage("Something Went Wrong Pls Check Again")}
+          setMessage(data)}
       }).catch(err => {
         setMessage("Something Went Wrong Pls Check Again");
       })
