@@ -123,7 +123,7 @@ function signUp(data, callback) {
         hash.update(inc);
         return hash.digest('hex');
     }
-
+    /*
     fs.readFile(path.join(publicPath, 'data.json'), 'utf-8', (err, fileData) => {
         if (err) {
             console.error('Error reading file:', err);
@@ -149,6 +149,29 @@ function signUp(data, callback) {
                 }
             });
         }
+    });
+    */
+    //To Data Base..
+    sql.query("SELECT UserName FROM users",(err,users)=>{
+        if (!err) {
+            const names = users.map(user => user.UserName);
+            isUserExist =  names.includes(data.name);
+
+            if(isUserExist){callback('Username already exists. Please choose a different one.')}else{
+                //Test
+                object.push({
+                    name: toHash(data.name),
+                    password: toHash(data.password),
+                });
+                fs.writeFile(path.join(publicPath, 'data.json'), JSON.stringify(object, null, 2), 'utf-8', (writeErr) => {
+                    if (writeErr) {
+                        console.error('Error writing file:', writeErr);
+                    } else {
+                        callback('Account Succsessfully Created!');
+                    }
+                });
+            }
+        }else{console.error(err)}
     });
 }
 
